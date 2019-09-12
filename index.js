@@ -6,7 +6,9 @@ const bodyParser = require("body-parser");
 const path = require('path');
 
 app.get('/', function(req, res){
-    res.sendfile('index.html');
+    //res.sendfile('index.html');
+    res.setHeader('Content-Type', 'text/plain');
+    res.end("hello");
 });
 
 
@@ -23,7 +25,7 @@ require("./model/Post");
 
 //MiddleWare
 
-// var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json()
 http.createServer(app);
 app.use(bodyParser.json())
 
