@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require('path');
+const cors = require("cors");
+
+app.use(cors());
 
 app.get('/', function(req, res){
     //res.sendfile('index.html');
