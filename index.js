@@ -5,6 +5,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require('path');
 
+app.get('/', function(req, res){
+    res.sendfile('index.html');
+});
+
 
 
 app
@@ -96,7 +100,10 @@ app.get("/clients/:client_uid", async (req, res) =>{
     }
  })
 
-app.get('/', (req, res) => "hello" );   
+app.get('/', (req, res) => {
+
+    console.log(req.body) 
+} );   
 
 app.post("/clients", async(req, res) =>{
  
