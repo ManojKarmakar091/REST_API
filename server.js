@@ -1,7 +1,15 @@
 const express = require("express");
+const http = require('http');
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const path = require('path');
+
+
+
+app
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'));
 
 //Database connection
 require("./mongo")
@@ -12,7 +20,7 @@ require("./model/Post");
 //MiddleWare
 
 // var jsonParser = bodyParser.json()
-
+http.createServer(app);
 app.use(bodyParser.json())
 
 const Post = mongoose.model("Post")
