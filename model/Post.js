@@ -26,9 +26,15 @@ const post_schema = mongoose.Schema({
     },
    
     pets: {
-        
-        type : String
-    }
+        name: String,
+        type : String,
+        color: String
+    },
+
+
+    
+
+
 
 })
 

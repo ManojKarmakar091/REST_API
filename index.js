@@ -25,6 +25,7 @@ require("./mongo");
 
 //Models
 require("./model/Post");
+require("./model/Appointment");
 
 //MiddleWare
 
@@ -33,16 +34,18 @@ http.createServer(app);
 app.use(bodyParser.json())
 
 const Post = mongoose.model("Post")
+const Appointment = mongoose.model("Appointment")
 
 
 app.get("/clients/search", async(req,res) =>{
+    
  try { 
 
 const get = await Post.find({
 
 })
 res.send(get)
-
+// console.log(res.pets);
 } catch(error){
     
     res.status(500) 
@@ -135,9 +138,52 @@ try {
 })
 
 
-const port = process.env.PORT || 5000;
+app.get("/appointments/search", async(req,res) =>{
+    
+    try { 
+   
+   const get = await Appointment.find({
+   
+   })
+   res.send(get)
+//    console.log(res.pets);
+   } catch(error){
+       
+       res.status(500) 
+   }
+   });
+
+   app.post("/appointments", async(req, res) =>{
+ 
+    // console.log(req.body)
+       res.send(req.body)
+    try {
+    
+        const appointments = new Appointment();
+        appointments.appt_link_id = req.body.appt_link_id;
+        appointments.appt_type_id = req.body.appt_type_id;
+        appointments.appt_sub_type_id = req.body.appt_sub_type_id;
+        appointments.patient_id = req.body.patient_id;
+        appointments.client_id = req.body.client_id;
+        appointments.appt_start_date = req.body.appt_start_date;
+        appointments.appt_end_date = req.body.appt_end_date;
+        appointments.doctor_id = req.body.doctor_id;
+    
+        await appointments.save();
+        res.send(appointments)
+        
+    } catch (error) {
+        res.status(500);
+        
+    }
+       
+    
+    })
+
+
+const port = process.env.PORT || 5001;
 app.listen(port,function(){
-console.log("Server is running on 5000");
+console.log("Server is running on 5001");
 
 
 
